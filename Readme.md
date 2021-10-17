@@ -12,12 +12,15 @@ Curl request like:
 
 __/get__
 
-curl --location --request GET 'localhost:8080/get/1' \ --header 'Content-Type: text/plain_
+curl --location --request GET 'localhost:8080/get/1'
+
 * You can get value with given key in the URL path , but if it doesnt exist 404 will return
 
 __/create__
 
-curl --location --request POST 'localhost:8080/create' \ --header 'Content-Type: text/plain' \ --data-raw 'bar'
+curl --location --request POST 'localhost:8080/create' \
+--header 'Content-Type: text/plain' \
+--data-raw 'denemetest3'
 
 * You can put the value with default key , and api return object key value.Then u can access value with given key
 

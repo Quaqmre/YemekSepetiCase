@@ -51,14 +51,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/get/1",
+					"raw": "localhost:8080/get/0",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"get",
-						"1"
+						"0"
 					]
 				}
 			},
