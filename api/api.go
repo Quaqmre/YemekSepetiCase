@@ -13,6 +13,7 @@ import (
 
 var db, interChan = store.NewStore()
 
+// requestLogger is middleware to log request path and method for every request.
 func requestLogger(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		log.Println(r.URL.Path, r.Method)
@@ -25,6 +26,8 @@ func create(w http.ResponseWriter, r *http.Request) {
 		var err error
 		defer func() {
 			if err != nil {
+				log.Println("create finished with error")
+
 				w.WriteHeader(http.StatusInternalServerError)
 				w.Write([]byte(err.Error()))
 			}
@@ -36,6 +39,7 @@ func create(w http.ResponseWriter, r *http.Request) {
 		resp["key"] = *db.Ops
 		jsonResp, err := json.Marshal(resp)
 		w.Header().Set("Content-Type", "application/json")
+		log.Println("create finished successfully")
 
 		w.Write(jsonResp)
 		w.WriteHeader(http.StatusCreated)
@@ -48,6 +52,7 @@ func get(w http.ResponseWriter, r *http.Request) {
 		var err error
 		defer func() {
 			if err != nil {
+				log.Println("get finished with error")
 				w.WriteHeader(http.StatusInternalServerError)
 				w.Write([]byte(err.Error()))
 			}
@@ -63,6 +68,8 @@ func get(w http.ResponseWriter, r *http.Request) {
 			}
 
 			jsonResp, _ := json.Marshal(value)
+			log.Println("get finished successfully")
+
 			w.Write(jsonResp)
 			w.WriteHeader(http.StatusOK)
 		} else {
@@ -78,6 +85,7 @@ func flush(w http.ResponseWriter, r *http.Request) {
 		var err error
 		defer func() {
 			if err != nil {
+				log.Println("flush finished with error")
 				w.WriteHeader(http.StatusInternalServerError)
 				w.Write([]byte(err.Error()))
 			}
@@ -85,6 +93,7 @@ func flush(w http.ResponseWriter, r *http.Request) {
 
 		db.Flush()
 		db.Marshall()
+		log.Println("flush finished successfully")
 
 		w.WriteHeader(http.StatusOK)
 
@@ -93,9 +102,11 @@ func flush(w http.ResponseWriter, r *http.Request) {
 
 // New Api return bunch of handler for store objects
 func NewApi() {
+	log.Println("Api will increase soon..")
 	http.HandleFunc("/create", requestLogger(create))
 	http.HandleFunc("/get/", requestLogger(get))
 	http.HandleFunc("/flush", requestLogger(flush))
 
+	log.Println("Listening port 8080")
 	http.ListenAndServe(":8080", nil)
 }
