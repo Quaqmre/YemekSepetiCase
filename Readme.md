@@ -12,7 +12,7 @@ Curl request like:
 
 __/get__
 
-curl --location --request GET 'localhost:8080/get/1'
+curl --location --request GET 'localhost:8080/get/0'
 
 * You can get value with given key in the URL path , but if it doesnt exist 404 will return
 
