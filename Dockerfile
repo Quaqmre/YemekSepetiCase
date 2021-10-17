@@ -8,7 +8,7 @@ RUN apk add --no-cache gcc musl-dev linux-headers git
 ADD . /yemeksepetiCase
 RUN cd /yemeksepetiCase && go mod download && go build
 
-# Pull Geth into a second stage deploy alpine container
+# Pull yemeksepetiCase into a second stage deploy alpine container
 FROM alpine:latest
 
 RUN apk add --no-cache ca-certificates
