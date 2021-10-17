@@ -16,8 +16,3 @@ COPY --from=builder /yemeksepetiCase/yemeksepetiCase /usr/local/bin/
 
 EXPOSE 8080
 ENTRYPOINT ["yemeksepetiCase"]
-
-# Add some metadata labels to help programatic image consumption
-ARG COMMIT=""
-ARG VERSION=""
-ARG BUILDNUM=""
