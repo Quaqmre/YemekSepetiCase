@@ -29,7 +29,7 @@ curl --location --request PUT 'localhost:8080/flush'
 
 
 
-###### By the way every one minute in-memory db write themself in to do file for persistance mod.
+###### By the way every one minute in-memory db write themself into the file for persistance mod.
 
 
 ## Build and Run Stage
